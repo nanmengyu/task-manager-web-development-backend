@@ -39,7 +39,7 @@ class TaskListCreateAPIView(APIView):
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data,status=status.HTTP_201_CREATED)
-        return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
 class TaskDetailAPIView(APIView):
@@ -51,10 +51,19 @@ class TaskDetailAPIView(APIView):
         except Task.DoesNotExist:
             return None
     
+    def get(self,request,pk):
+        task = self.get_object(pk,request.user)
+        if not task:
+            return Response({"error":"Task not found or not accessible"},status=status.HTTP_404_NOT_FOUND)
+        serializer = TaskSerilizer(task,many=False)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+        
+
+
     def put(self,request,pk):
         task = self.get_object(pk,request.user)
         if not task:
-            return Response({"error":"Task not found or not accesssible"},status=status.HTTP_404_NOT_FOUND)
+            return Response({"error":"Task not found or not accessible"},status=status.HTTP_404_NOT_FOUND)
 
 
         serializer = TaskSerilizer(task,data=request.data,partial=False)

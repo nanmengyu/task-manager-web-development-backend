@@ -24,11 +24,11 @@ curl -X GET http://127.0.0.1:8000/api/tasks/ \
 			"priority":"low"
 	}'
 # 创建新任务
-#echo "creating new task..."
-#curl -X POST http://127.0.0.1:8000/api/tasks/ \
-#	-H "Authorization: Bearer $ACCESS_TOKEN" \
-#	-H "Content-Type: application/json" \
-#	-d '{"title":"New Task","description":"Complete project"}'
+echo "creating new task..."
+curl -X POST http://127.0.0.1:8000/api/tasks/ \
+	-H "Authorization: Bearer $ACCESS_TOKEN" \
+	-H "Content-Type: application/json" \
+	-d '{"title":"New Task","description":"Complete project","status":"completed","priority":"high"}'
 
 # 更新单个任务的所有信息
 echo -e "\nupdate task pk\n"
