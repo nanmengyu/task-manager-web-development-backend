@@ -151,8 +151,19 @@ USE_TZ = True # 启用Django的时区支持
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+# 访问静态文件的URL路径
 STATIC_URL = 'static/'
+# 开发环境静态文件目录
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+# 生产环境静态文件目录
+STATIC_ROOT = '/var/www/myproject/static/'
 
+# Media files (word,mp4,mp3)
+MEDIA_ROOT = '/var/www/myproject/media/'
+
+MEDIA_URL = 'media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
